@@ -29,9 +29,9 @@ const getAllTasks = async (req, res) => {
 
 const getTasksByStatus = async (req, res) => {
   try {
-    const allStatus = ["active", "late", "cancelled", "completed"];
+    const taskStatus = ["active", "late", "cancelled", "completed"];
     const { status } = req.params;
-    if (allStatus.includes(status)) {
+    if (taskStatus.includes(status)) {
       const tasks = await Task.findAll({
         where: { status },
         include: { model: User, attributes: ["id", "name", "status"] },

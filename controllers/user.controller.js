@@ -64,10 +64,17 @@ const updateUser = async (req, res) => {
 const deleteUser = async (req, res) => {
   try {
     const { user } = req;
-    await user.update({ status: "inactive" });
-    res.status(204).json({
-      status: "success",
-    });
+    if (user.status === "inactive") {
+      return res.status(404).json({
+        status: "error",
+        message: "The user is already inactive",
+      });
+    } else {
+      await user.update({ status: "inactive" });
+      res.status(204).json({
+        status: "success",
+      });
+    }
   } catch (error) {
     console.log(error);
   }
