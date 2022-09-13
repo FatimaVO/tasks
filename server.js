@@ -1,6 +1,6 @@
 const { app } = require("./app");
 const { db } = require("./utils/database.util");
-const { associationsModel } = require("./models/associations.model");
+const { initModels } = require("./models/initModels");
 const dotenv = require("dotenv");
 
 dotenv.config({ path: "./config.env" });
@@ -8,8 +8,7 @@ dotenv.config({ path: "./config.env" });
 const startServer = async () => {
   try {
     await db.authenticate().then();
-    //Established relationhips...
-    associationsModel();
+    initModels();
     await db.sync().then();
     const PORT = 4000;
     app.listen(PORT, () => {

@@ -91,7 +91,7 @@ const updateTask = async (req, res) => {
     } else {
       return res.status(400).json({
         status: "error",
-        message: "The task has already been completed/cancelled",
+        message: "The task has already been completed or cancelled",
       });
     }
   } catch (error) {
